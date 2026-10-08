@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Industrial &amp; Energy GTM Plan</title>
+<meta name="description" content="Vince's Day 1 framework for building Cognition's Industrial & Energy vertical: ICP, target accounts, personas, and first plays, with notes from Make It Snow.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDF0EE; --paper-2:#E2E7E4; --ink:#1B2830; --shale:#56656C; --rule:#C3CCC8;
+  --ochre:#A8721F; --brine:#2E6B6E; --flare:#A33A2C; --sand:#D9C9A3; --clay:#B9A07A;
+  --display:"Archivo",system-ui,sans-serif; --body:"Source Serif 4",Georgia,serif;
+  --rail:248px;
+}
+@media (prefers-color-scheme:dark){
+  :root{--paper:#141B1F;--paper-2:#1C252A;--ink:#E3E8E5;--shale:#98A6AC;--rule:#33414A;
+  --ochre:#D7A04A;--brine:#6FB0B2;--flare:#E07563;--sand:#5E5440;--clay:#7A6A50;}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.62;-webkit-font-smoothing:antialiased}
+a{color:var(--brine);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--ochre);outline-offset:3px;border-radius:2px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--ink);color:var(--paper);padding:8px 12px;z-index:50}
+.skip:focus{left:16px}
+
+/* Rail: the depth track */
+.rail{position:fixed;inset:0 auto 0 0;width:var(--rail);border-right:1px solid var(--rule);padding:28px 0 28px 24px;display:flex;flex-direction:column;background:var(--paper);z-index:20}
+.brand{font-family:var(--display);font-stretch:118%;font-weight:750;font-size:15px;line-height:1.25;letter-spacing:.01em;margin:0 24px 28px 0;color:var(--ink);text-decoration:none}
+.brand span{display:block;font-weight:400;font-stretch:100%;color:var(--shale);font-size:13px;margin-top:4px}
+.track{list-style:none;margin:0;padding:0;position:relative;flex:1}
+.track::before{content:"";position:absolute;left:46px;top:6px;bottom:6px;width:2px;background:var(--rule)}
+.track li{position:relative}
+.track a{display:grid;grid-template-columns:24px 1fr;gap:28px;align-items:baseline;padding:9px 20px 9px 0;text-decoration:none;color:var(--shale);font-family:var(--display);font-size:14px;line-height:1.3}
+.track a .n{font-variant-numeric:tabular-nums;font-weight:600;text-align:right;position:relative}
+.track a .n::after{content:"";position:absolute;right:-19px;top:.45em;width:8px;height:8px;border-radius:50%;background:var(--paper);border:2px solid var(--rule)}
+.track a:hover{color:var(--ink)}
+.track a[aria-current="page"]{color:var(--ink);font-weight:650}
+.track a[aria-current="page"] .n::after{background:var(--ochre);border-color:var(--ochre)}
+.rail-foot{font-size:12.5px;color:var(--shale);margin:20px 24px 0 0;line-height:1.45}
+
+.topbar{display:none}
+main{margin-left:var(--rail);min-height:100vh}
+.chapter{display:none;max-width:860px;padding:56px 56px 40px}
+.chapter.active{display:block}
+@media (prefers-reduced-motion:no-preference){.chapter.active{animation:settle .35s ease-out}}
+@keyframes settle{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.ch-num{font-family:var(--display);font-stretch:125%;font-weight:800;font-size:15px;color:var(--ochre);margin:0 0 8px}
+h1,h2,h3{font-family:var(--display);color:var(--ink);margin:0}
+h1{font-stretch:112%;font-weight:780;font-size:clamp(34px,5vw,54px);line-height:1.04;letter-spacing:-.01em;max-width:18ch}
+h2{font-stretch:108%;font-weight:720;font-size:26px;line-height:1.15;margin:48px 0 14px}
+h3{font-stretch:104%;font-weight:680;font-size:19px;line-height:1.25;margin:0 0 8px}
+.lede{font-size:21px;line-height:1.5;max-width:60ch;margin:20px 0 0;color:var(--ink)}
+p,li{max-width:66ch}
+p{margin:0 0 14px}
+.muted{color:var(--shale)}
+ul.plain{padding-left:20px;margin:0 0 14px}
+ul.plain li{margin:0 0 6px}
+
+/* Hero strata */
+.strata{margin:40px 0 8px;border:1px solid var(--rule);display:grid;grid-template-columns:72px 1fr}
+.depth{border-right:1px solid var(--rule);font-family:var(--display);font-size:12px;color:var(--shale);position:relative}
+.depth span{position:absolute;right:8px;transform:translateY(-50%);font-variant-numeric:tabular-nums}
+.layers{display:flex;flex-direction:column}
+.layer{display:flex;align-items:center;gap:18px;padding:0 20px;text-decoration:none;color:var(--ink);border-bottom:1px solid color-mix(in srgb,var(--ink) 14%,transparent);font-family:var(--display);font-size:16px;position:relative;overflow:hidden}
+.layer:last-child{border-bottom:0}
+.layer b{font-stretch:125%;font-weight:800;font-size:13px;width:22px;flex:none}
+.layer em{font-style:normal;font-family:var(--body);font-size:14.5px;color:var(--shale);margin-left:auto;text-align:right}
+.layer:hover{filter:brightness(.96)}
+.l1{height:58px;background:var(--paper-2)}
+.l2{height:70px;background:repeating-linear-gradient(0deg,transparent 0 9px,color-mix(in srgb,var(--clay) 45%,transparent) 9px 10px),color-mix(in srgb,var(--sand) 55%,var(--paper))}
+.l3{height:62px;background:radial-gradient(color-mix(in srgb,var(--clay) 55%,transparent) 1.2px,transparent 1.6px) 0 0/9px 9px,color-mix(in srgb,var(--sand) 80%,var(--paper))}
+.l4{height:84px;background:repeating-linear-gradient(-35deg,transparent 0 7px,color-mix(in srgb,var(--shale) 30%,transparent) 7px 8px),color-mix(in srgb,var(--shale) 22%,var(--paper))}
+.l5{height:56px;background:color-mix(in srgb,var(--brine) 22%,var(--paper))}
+.l6{height:66px;background:repeating-linear-gradient(90deg,transparent 0 14px,color-mix(in srgb,var(--brine) 30%,transparent) 14px 15px),color-mix(in srgb,var(--brine) 34%,var(--paper))}
+.l7{height:78px;background:repeating-linear-gradient(0deg,transparent 0 5px,color-mix(in srgb,var(--ochre) 40%,transparent) 5px 6px),color-mix(in srgb,var(--ochre) 30%,var(--paper))}
+.strata-cap{font-size:14px;color:var(--shale);margin:0}
+
+/* Figures */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0;border-top:2px solid var(--ink);margin:28px 0 8px}
+.fig{padding:16px 18px 14px 0;border-bottom:1px solid var(--rule)}
+.fig strong{display:block;font-family:var(--display);font-stretch:112%;font-weight:780;font-size:34px;line-height:1.05;color:var(--ink)}
+.fig span{font-size:14.5px;color:var(--shale);display:block;margin-top:6px;line-height:1.4}
+
+/* Ledger rows (ICP, personas) */
+.ledger{border-top:2px solid var(--ink);margin:24px 0}
+.row{display:grid;grid-template-columns:200px 1fr;gap:24px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.row .k{font-family:var(--display);font-weight:680;font-size:16px;line-height:1.3}
+.row .k small{display:block;font-weight:400;color:var(--shale);font-size:13.5px;margin-top:4px;font-family:var(--body)}
+.row .v p:last-child,.row .v ul:last-child{margin-bottom:0}
+
+/* Book notes */
+.note{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--rule);margin:24px 0}
+.note > div{padding:20px 22px}
+.note .book{background:var(--paper-2);border-right:1px solid var(--rule)}
+.note h3{font-size:16px}
+.note .tag{font-family:var(--display);font-size:13px;color:var(--shale);margin:0 0 8px}
+.note .app .tag{color:var(--brine)}
+.add{border:1.5px dashed var(--rule);padding:18px 22px;color:var(--shale);font-size:15.5px;margin:24px 0}
+
+/* Accounts */
+.acct{border-top:2px solid var(--ink);padding:22px 0 8px;margin:32px 0 0}
+.acct-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px;margin-bottom:10px}
+.acct-head h2{margin:0;font-size:28px}
+.tier{font-family:var(--display);font-size:13px;font-weight:650;padding:3px 9px;border-radius:3px;background:color-mix(in srgb,var(--brine) 18%,transparent);color:var(--brine)}
+.tier.t2{background:color-mix(in srgb,var(--ochre) 20%,transparent);color:var(--ochre)}
+.facts{font-size:15px;color:var(--shale);margin:0 0 16px}
+.acct-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 32px}
+.acct-grid h3{font-size:15.5px;margin-top:14px}
+.acct-grid ul{padding-left:18px;margin:0;font-size:16px}
+.acct-grid li{margin-bottom:5px}
+.unverified{font-size:14.5px;border-left:3px solid var(--flare);padding:6px 0 6px 12px;margin:16px 0 0;color:var(--ink)}
+
+/* Plays */
+.play{display:grid;grid-template-columns:56px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--rule)}
+.play:first-of-type{border-top:2px solid var(--ink)}
+.play .pn{font-family:var(--display);font-stretch:125%;font-weight:800;font-size:30px;color:var(--ochre);line-height:1}
+.play dl{display:grid;grid-template-columns:100px 1fr;gap:6px 16px;margin:10px 0 0;font-size:16px}
+.play dt{font-family:var(--display);font-weight:650;font-size:14.5px;color:var(--shale);padding-top:2px}
+.play dd{margin:0}
+
+/* Phases */
+.phase{display:grid;grid-template-columns:120px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid var(--rule)}
+.phase:first-of-type{border-top:2px solid var(--ink)}
+.phase .when{font-family:var(--display);font-stretch:115%;font-weight:760;font-size:20px;line-height:1.1}
+.phase .when small{display:block;font-weight:400;font-stretch:100%;font-size:13.5px;color:var(--shale);margin-top:4px}
+
+.sources{margin:44px 0 0;padding-top:14px;border-top:1px solid var(--rule);font-size:13.5px;color:var(--shale)}
+.sources h3{font-size:13.5px;color:var(--shale);font-weight:650;margin-bottom:6px}
+.sources ol{padding-left:18px;margin:0}
+.sources li{margin-bottom:3px;max-width:none;word-break:break-word}
+
+.pager{display:flex;justify-content:space-between;gap:16px;max-width:860px;padding:0 56px 56px;margin-left:var(--rail)}
+.pager a{flex:1;max-width:48%;border:1px solid var(--rule);padding:14px 18px;text-decoration:none;color:var(--ink);font-family:var(--display);font-size:15.5px;line-height:1.3}
+.pager a small{display:block;color:var(--shale);font-size:13px;font-weight:400;margin-bottom:3px}
+.pager a:hover{border-color:var(--ink)}
+.pager .next{margin-left:auto;text-align:right}
+.pager a[hidden]{display:none}
+
+@media (max-width:900px){
+  .rail{transform:translateX(-100%);transition:transform .25s ease;width:280px;box-shadow:none}
+  .rail.open{transform:none;box-shadow:0 0 0 100vmax color-mix(in srgb,var(--ink) 35%,transparent)}
+  .topbar{display:flex;position:sticky;top:0;z-index:15;align-items:center;justify-content:space-between;padding:12px 16px;background:var(--paper);border-bottom:1px solid var(--rule)}
+  .topbar .brand{margin:0;font-size:14px}
+  .menu{font-family:var(--display);font-size:15px;background:none;border:1px solid var(--rule);color:var(--ink);padding:7px 12px;cursor:pointer}
+  main{margin-left:0}
+  .chapter{padding:32px 16px 24px}
+  .pager{padding:0 16px 40px;margin-left:0}
+  .row,.phase{grid-template-columns:1fr;gap:6px}
+  .note,.acct-grid{grid-template-columns:1fr}
+  .note .book{border-right:0;border-bottom:1px solid var(--rule)}
+  .layer em{display:none}
+  .strata{grid-template-columns:44px 1fr}
+  .play{grid-template-columns:40px 1fr;gap:12px}
+  .play dl{grid-template-columns:1fr;gap:0}
+  .play dd{margin-bottom:8px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <a class="brand" href="#agenda">Industrial &amp; Energy</a>
+  <button class="menu" aria-expanded="false" aria-controls="rail">Chapters</button>
+</div>
+
+<nav class="rail" id="rail" aria-label="Chapters">
+  <a class="brand" href="#agenda">Industrial &amp; Energy at Cognition<span>Day 1 framework</span></a>
+  <ol class="track" id="track"></ol>
+  <p class="rail-foot">Working plan. Research current as of October 7, 2026.</p>
+</nav>
+
+<main id="main">
+
+<!-- AGENDA -->
+<section class="chapter" id="agenda" data-title="The framework" data-n="00">
+  <p class="ch-num">Agenda</p>
+  <h1>Building Cognition's Industrial &amp; Energy vertical from Day 1</h1>
+  <p class="lede">How I'll find, enter, and expand the energy and industrial accounts where autonomous engineering capacity matters most, built on the go-to-market lessons in <i>Make It Snow</i>.</p>
+
+  <div class="strata" aria-label="Chapters, ordered from surface to target">
+    <div class="depth" aria-hidden="true">
+      <span style="top:0;transform:none;top:6px">surface</span>
+      <span style="bottom:6px;top:auto;transform:none">target</span>
+    </div>
+    <div class="layers">
+      <a class="layer l1" href="#why"><b>01</b>Why Industrial &amp; Energy<em>The thesis</em></a>
+      <a class="layer l2" href="#icp"><b>02</b>The ICP<em>Five questions, answered</em></a>
+      <a class="layer l3" href="#book"><b>03</b><span><i>Make It Snow</i>, applied</span><em>Grows as I read</em></a>
+      <a class="layer l4" href="#accounts"><b>04</b>Target accounts<em>ExxonMobil, Chevron, Halliburton, EPD</em></a>
+      <a class="layer l5" href="#personas"><b>05</b>Personas and entry points<em>Who champions, who signs</em></a>
+      <a class="layer l6" href="#plan"><b>06</b>Day 1 to Day 90<em>Building the motion</em></a>
+      <a class="layer l7" href="#plays"><b>07</b>First plays<em>Owner, target, next step</em></a>
+    </div>
+  </div>
+  <p class="strata-cap">Read top to bottom: each chapter drills one layer closer to the first signed deal.</p>
+</section>
+
+<!-- 01 WHY -->
+<section class="chapter" id="why" data-title="Why Industrial &amp; Energy" data-n="01">
+  <p class="ch-num">01</p>
+  <h1>Why Industrial &amp; Energy deserves its own motion</h1>
+  <p class="lede">The largest energy companies have put hard dollar targets on structural cost, and they are consolidating engineering and IT into a few hubs to hit them. That is a buying condition for autonomous engineering capacity.</p>
+
+  <div class="figs">
+    <div class="fig"><strong>$20B</strong><span>ExxonMobil structural cost savings target by 2030, with $15.1B delivered since 2019</span></div>
+    <div class="fig"><strong>$3–4B</strong><span>Chevron structural cost reduction target by end of 2026, about $1B of it from technology</span></div>
+    <div class="fig"><strong>$299M</strong><span>Halliburton severance charges in FY2025 as it cut headcount</span></div>
+  </div>
+
+  <h2>What makes this a distinct ICP</h2>
+  <p>A vertical is only worth building if the buyer, the pain, and the proof differ from the horizontal motion. In Industrial &amp; Energy, three things do:</p>
+  <div class="ledger">
+    <div class="row"><div class="k">Legacy depth</div><div class="v"><p>Decades of plant, field, and back-office applications on old stacks, plus large ERP migrations already underway (ExxonMobil is moving from SAP ECC6 to S/4HANA). Modernization is a budgeted program, not a wish.</p></div></div>
+    <div class="row"><div class="k">Governance is the product</div><div class="v"><p>Safety-critical operations mean every change needs review, audit, and controls. Devin's enterprise tiers, including single-tenant VPC and customer-managed keys, are the reason a security team says yes.</p></div></div>
+    <div class="row"><div class="k">Knowledge walking out the door</div><div class="v"><p>Workforce reductions and retirements are removing the people who understand these systems. An agent that documents and works the codebase (DeepWiki, Devin) keeps that capacity in-house.</p></div></div>
+  </div>
+
+  <h2>Proof Cognition can already point to</h2>
+  <p>There is no published Devin customer in energy yet, which is the opening. The closest industrial and regulated references:</p>
+  <ul class="plain">
+    <li>Mercedes-Benz cut a COBOL migration from about 8 months to 8 days.</li>
+    <li>GE Aerospace is a published case study.</li>
+    <li>Nubank reported 8–12x engineering time efficiency on an ETL migration.</li>
+    <li>Itaú uses Devin to remediate about 70% of security vulnerabilities automatically.</li>
+  </ul>
+
+  <div class="sources"><h3>Sources</h3><ol>
+    <li><a href="https://corporate.exxonmobil.com/news/news-releases/2026/0130-exxonmobil-announces-2025-results">ExxonMobil FY2025 results</a></li>
+    <li><a href="https://www.nasdaq.com/press-release/chevron-reports-fourth-quarter-2025-results-2026-01-30">Chevron Q4 2025 results</a>; <a href="https://www.bnnbloomberg.ca/business/2025/11/12/chevron-targets-10-per-cent-annual-cash-flow-growth-through-2030-higher-cost-cutting/">BNN Bloomberg on Chevron's technology savings</a></li>
+    <li><a href="https://www.businesswire.com/news/home/20260121200751/en/Halliburton-Announces-Fourth-Quarter-2025-Results">Halliburton Q4 2025 results</a></li>
+    <li><a href="https://www.constellationr.com/insights/news/exxonmobil-outline-process-automation-ai-efforts">Constellation Research on ExxonMobil's process automation and S/4HANA move</a></li>
+    <li><a href="https://docs.devin.ai/enterprise/deployment/overview.md">Devin enterprise deployment docs</a></li>
+    <li><a href="https://devin.ai/customers">Devin customers</a>; <a href="https://pulse2.com/cognition-raises-over-1-billion-at-a-26-billion-valuation-as-devin-adoption-accelerates-across-enterprises/">Pulse 2.0 on Cognition's May 2026 round</a></li>
+  </ol></div>
+</section>
+
+<!-- 02 ICP -->
+<section class="chapter" id="icp" data-title="The ICP" data-n="02">
+  <p class="ch-num">02</p>
+  <h1>The ideal customer profile, built from the product out</h1>
+  <p class="lede">Most ICPs start with firmographics and work back to pain. This one starts with what only Cognition does and follows it outward to the account.</p>
+
+  <div class="ledger">
+    <div class="row"><div class="k">1. Differentiators<small>What only we do</small></div><div class="v">
+      <ul class="plain">
+        <li>Devin is an autonomous engineer: it takes a ticket to a pull request, asynchronously and in parallel. Copilots assist one developer at a time.</li>
+        <li>Cloud agents (Devin) and local agents (Windsurf) in one platform, routed to whichever model fits the task.</li>
+        <li>Enterprise deployment options from isolated multi-tenant to single-tenant VPC with customer-managed keys; SOC 2 Type II; no training on customer code by default.</li>
+        <li>The value is new engineering capacity, not faster typing.</li>
+      </ul></div></div>
+    <div class="row"><div class="k">2. Pain points<small>What the customer feels</small></div><div class="v">
+      <ul class="plain">
+        <li>Hard cost targets with fewer engineers to deliver them.</li>
+        <li>Legacy estates that absorb budget and people.</li>
+        <li>Security and compliance remediation backlogs that keep growing.</li>
+        <li>System knowledge leaving with retirements and reductions.</li>
+      </ul></div></div>
+    <div class="row"><div class="k">3. Use cases<small>Where the pain shows up</small></div><div class="v">
+      <ul class="plain">
+        <li>ERP and application migrations, such as SAP ECC6 to S/4HANA custom code.</li>
+        <li>Framework upgrades and legacy language modernization.</li>
+        <li>Vulnerability remediation and test coverage.</li>
+        <li>Integration and data pipelines between field and plant systems and the enterprise.</li>
+        <li>Product engineering for commercial energy software (Halliburton's Landmark).</li>
+      </ul></div></div>
+    <div class="row"><div class="k">4. Personas<small>Who owns those use cases</small></div><div class="v">
+      <ul class="plain">
+        <li><b>Champion:</b> the engineering hub or platform engineering leader who owns the backlog.</li>
+        <li><b>Strategic sponsor:</b> the executive accountable for the cost or AI program.</li>
+        <li><b>Economic buyer:</b> the CIO or chief technology officer, with the CISO as co-sponsor for remediation.</li>
+      </ul>
+      <p class="muted">Chapter 05 maps these by account type.</p></div></div>
+    <div class="row"><div class="k">5. Companies<small>Where those personas sit</small></div><div class="v">
+      <p>Energy and industrial companies with a large internal software organization, a deep legacy estate, a public cost or AI mandate, and an engineering hub already consolidating the work.</p>
+      <p><b>Qualifying signals:</b> a published savings target, an active modernization program, a central engineering or shared-services hub, and prior GenAI purchases.</p></div></div>
+  </div>
+
+  <div class="sources"><h3>Sources</h3><ol>
+    <li><a href="https://docs.devin.ai/enterprise/security/overview">Devin enterprise security overview</a></li>
+    <li><a href="https://docs.devin.ai/enterprise/deployment/overview.md">Devin enterprise deployment docs</a></li>
+    <li><a href="https://pulse2.com/cognition-raises-over-1-billion-at-a-26-billion-valuation-as-devin-adoption-accelerates-across-enterprises/">Pulse 2.0 on Cognition's May 2026 round</a></li>
+  </ol></div>
+</section>
+
+<!-- 03 BOOK -->
+<section class="chapter" id="book" data-title="Make It Snow, applied" data-n="03">
+  <p class="ch-num">03</p>
+  <h1><i>Make It Snow</i>, applied to Cognition</h1>
+  <p class="lede">Chris Degnan and Denise Persson's account of how Snowflake built its go-to-market organization from zero to billions. Each note pairs what I took from the book with how I'll use it here.</p>
+
+  <article class="note">
+    <div class="book">
+      <p class="tag">From the book</p>
+      <h3>Build the ICP from the product outward</h3>
+      <p>Five questions, in order:</p>
+      <ol>
+        <li>What are the major differentiators of the product?</li>
+        <li>What pain points does it solve for customers?</li>
+        <li>In which use cases do those pain points emerge?</li>
+        <li>Which personas own those use cases?</li>
+        <li>In which companies are those personas and use cases located?</li>
+      </ol>
+    </div>
+    <div class="app">
+      <p class="tag">At Cognition</p>
+      <h3>The Industrial &amp; Energy ICP</h3>
+      <p>I've answered all five for Devin in this vertical (<a href="#icp">chapter 02</a>). The order matters: it forces account selection to follow real use cases, which is why ExxonMobil and Chevron lead on modernization and hub consolidation, and Halliburton leads on product engineering.</p>
+    </div>
+  </article>
+
+  <div class="add">More notes go here as I read.</div>
+
+  <div class="sources"><h3>Sources</h3><ol>
+    <li><a href="https://www.waterstones.com/book/make-it-snow-from-zero-to-billions/denise-persson/chris-degnan/9781394254200"><i>Make It Snow: From Zero to Billions</i> (Wiley, 2025)</a></li>
+  </ol></div>
+</section>
+
+<!-- 04 ACCOUNTS -->
+<section class="chapter" id="accounts" data-title="Target accounts" data-n="04">
+  <p class="ch-num">04</p>
+  <h1>Target accounts</h1>
+  <p class="lede">Four Houston-area accounts, prioritized by how many ICP signals are public today. Gaps are marked so discovery starts in the right place.</p>
+
+  <article class="acct">
+    <div class="acct-head"><h2>ExxonMobil</h2><span class="tier">Tier 1</span></div>
+    <p class="facts">Spring, TX. $332.2B revenue (FY2025). 58,000 employees.</p>
+    <div class="acct-grid">
+      <div><h3>What they've said</h3><ul>
+        <li>$20B structural savings by 2030; $3.0B delivered in 2025 alone.</li>
+        <li>Enterprise AI and process automation run through Global Business Solutions (GBS).</li>
+        <li>Simplifying a complex IT estate; moving SAP ECC6 to S/4HANA.</li>
+        <li>About 2,000 roles cut in 2025, consolidating into regional hubs.</li>
+      </ul></div>
+      <div><h3>Where Devin fits</h3><ul>
+        <li>S/4HANA custom-code remediation and migration.</li>
+        <li>Capacity for the Bengaluru Technology Center (900+ technologists).</li>
+        <li>Remediation backlogs across a shared IT service.</li>
+      </ul>
+      <h3>Entry personas</h3><ul>
+        <li>GBS leadership and process transformation (John DiTullio).</li>
+        <li>Neil Hansen, now CFO, ran GBS through January 2026.</li>
+      </ul></div>
+    </div>
+    <p class="unverified">To find: the current GBS president and whoever owns IT or the AI program. No CIO is publicly named.</p>
+  </article>
+
+  <article class="acct">
+    <div class="acct-head"><h2>Chevron</h2><span class="tier">Tier 1</span></div>
+    <p class="facts">Houston, TX. $189.0B revenue (FY2025). 43,039 employees.</p>
+    <div class="acct-grid">
+      <div><h3>What they've said</h3><ul>
+        <li>$3–4B structural cost reduction by end of 2026, about $1B from technology.</li>
+        <li>Moving finance, HR, and IT to service centers in Manila and Buenos Aires.</li>
+        <li>Up to 20% workforce reduction by end of 2026.</li>
+        <li>Already buys GenAI: Microsoft Copilot, Claude, and in-house tools, plus an AI "moonshot" program.</li>
+      </ul></div>
+      <div><h3>Where Devin fits</h3><ul>
+        <li>Engineering capacity for the Bengaluru ENGINE center (opened October 2025, 1,000+ hires).</li>
+        <li>Hess integration work, now targeting $1.5B in synergies.</li>
+        <li>Holding delivery steady through the workforce reduction.</li>
+      </ul>
+      <h3>Entry personas</h3><ul>
+        <li>T. Ryder Booth, Chief Technology &amp; Engineering Officer (IT is in his remit).</li>
+        <li>Jeff Gustavson, CFO-designate from January 2027 and an AI strategy owner.</li>
+      </ul></div>
+    </div>
+    <p class="unverified">To verify: whether Bill Braun is still CIO. Leadership is reshuffling ahead of CEO succession, so timing matters.</p>
+  </article>
+
+  <article class="acct">
+    <div class="acct-head"><h2>Halliburton</h2><span class="tier">Tier 1</span></div>
+    <p class="facts">Houston, TX. $22.2B revenue (FY2025). 46,000+ employees.</p>
+    <div class="acct-grid">
+      <div><h3>What they've said</h3><ul>
+        <li>Sells software commercially through Landmark (DecisionSpace 365), so it runs a real product engineering organization.</li>
+        <li>Buying more software: Sekal (drilling automation) and InformatiQ (cloud-native asset management) in 2026.</li>
+        <li>CEO Jeff Miller frames AI around repetitive tasks and faster execution.</li>
+        <li>$299M severance in FY2025.</li>
+      </ul></div>
+      <div><h3>Where Devin fits</h3><ul>
+        <li>Integrating acquired codebases into Landmark.</li>
+        <li>Product engineering velocity on DecisionSpace 365, LOGIX, and ZEUS IQ.</li>
+        <li>Internal IT, separately, as a second entry point.</li>
+      </ul>
+      <h3>Entry personas</h3><ul>
+        <li>Tony Antoun, SVP Landmark Software and Services.</li>
+        <li>Shannon Slocum, COO, whose remit includes global technology.</li>
+      </ul></div>
+    </div>
+    <p class="unverified">To find: the CIO, who is described in the 10-K but not named.</p>
+  </article>
+
+  <article class="acct">
+    <div class="acct-head"><h2>Enterprise Products Partners</h2><span class="tier t2">Tier 2</span></div>
+    <p class="facts">Houston, TX. $52.6B revenue (FY2025). Staff are employed by its affiliate EPCO.</p>
+    <div class="acct-grid">
+      <div><h3>What they've said</h3><ul>
+        <li>No public digital, IT, or AI strategy found.</li>
+        <li>Growth capex guided down to $1.9–2.3B for 2026, from $4.4B in 2025.</li>
+        <li>Co-CEO Jim Teague retires January 2027; Randy Fowler becomes sole CEO.</li>
+      </ul></div>
+      <div><h3>Where Devin fits</h3><ul>
+        <li>To be discovered. Start with pipeline operations software and back-office systems.</li>
+      </ul>
+      <h3>Entry personas</h3><ul>
+        <li>IT historically reported through finance (CFO R. Daniel Boss once held IT).</li>
+        <li>Graham Bacon, COO.</li>
+      </ul></div>
+    </div>
+    <p class="unverified">Prospect from scratch: no public technology leader or partnerships. The CEO transition is a timing factor.</p>
+  </article>
+
+  <div class="sources"><h3>Sources</h3><ol>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/34088/000003408826000045/xom-20251231.htm">ExxonMobil FY2025 10-K</a>; <a href="https://corporate.exxonmobil.com/news/news-releases/2026/0130-exxonmobil-announces-2025-results">FY2025 results</a>; <a href="https://worldoil.com/news/2025/9/30/exxon-to-cut-2-000-jobs-as-oil-sector-workforce-reductions-accelerate/">World Oil on job cuts</a>; <a href="https://origin-corporate.exxonmobil.com/locations/india/newsroom/indian-talent-global-capability">ExxonMobil India</a>; <a href="https://www.cfodive.com/news/exxon-cfo-retire-citing-health-issues-oilgas-compensation/807596/">CFO Dive</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/93410/000009341026000078/cvx-20251231.htm">Chevron FY2025 10-K</a>; <a href="https://worldoil.com/news/2025/7/9/chevron-looks-to-centralize-operations-as-part-of-3-billion-cost-reduction-strategy/">World Oil on centralization</a>; <a href="https://fortune.com/2026/06/11/chevron-cfo-finance-chiefs-defining-ai-business-value/">Fortune on Chevron's AI</a>; <a href="https://www.chevron.com/who-we-are/leadership/t-ryder-booth">Chevron leadership</a>; <a href="https://kfgo.com/2025/10/09/chevron-expands-india-hub-to-boost-digital-and-ai-capabilities/">Reuters via KFGO on ENGINE</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/45012/000004501226000015/hal-20251231.htm">Halliburton FY2025 10-K</a>; <a href="https://jpt.spe.org/halliburton-acquires-sekal-to-expand-drilling-automation-portfolio">JPT on Sekal</a>; <a href="https://www.sec.gov/Archives/edgar/data/0000045012/000004501226000057/livemastererdocument.htm">Q2 2026 8-K</a>; <a href="https://www.halliburton.com/en/about-us/press-release/halliburton-delivers-on-digital-vision-at-landmark-innovation-forum-and-expo">LIFE2025 release</a></li>
+    <li><a href="https://www.sec.gov/Archives/edgar/data/1061219/000106121926000006/epd-20251231.htm">Enterprise Products FY2025 10-K</a>; <a href="https://www.sec.gov/Archives/edgar/data/1061219/000106121926000002/epd-20260203xex991.htm">Q4 2025 8-K</a>; <a href="https://hoodline.com/2026/07/houston-pipeline-king-jim-teague-to-exit-as-fowler-takes-solo-helm-at-enterprise/">Hoodline on CEO transition</a></li>
+  </ol></div>
+</section>
+
+<!-- 05 PERSONAS -->
+<section class="chapter" id="personas" data-title="Personas and entry points" data-n="05">
+  <p class="ch-num">05</p>
+  <h1>Personas and entry points</h1>
+  <p class="lede">The same three roles show up in every deal, but they sit in different places depending on how the company builds software.</p>
+
+  <h2>Integrated majors</h2>
+  <p class="muted">ExxonMobil, Chevron</p>
+  <div class="ledger">
+    <div class="row"><div class="k">Champion</div><div class="v"><p>The leader of the offshore engineering or shared-services hub, who owns the backlog and the headcount math.</p></div></div>
+    <div class="row"><div class="k">Strategic sponsor</div><div class="v"><p>The executive accountable for the structural savings or enterprise AI program.</p></div></div>
+    <div class="row"><div class="k">Economic buyer</div><div class="v"><p>The chief technology or IT executive, with the CISO as co-sponsor for security work.</p></div></div>
+    <div class="row"><div class="k">Opening line</div><div class="v"><p>Engineering capacity toward the savings target you've already published.</p></div></div>
+  </div>
+
+  <h2>Oilfield services with a software business</h2>
+  <p class="muted">Halliburton</p>
+  <div class="ledger">
+    <div class="row"><div class="k">Champion</div><div class="v"><p>Product engineering leadership inside the commercial software unit.</p></div></div>
+    <div class="row"><div class="k">Strategic sponsor</div><div class="v"><p>The software business leader, who is integrating acquisitions and shipping releases.</p></div></div>
+    <div class="row"><div class="k">Economic buyer</div><div class="v"><p>The business unit, which can buy for product engineering independently of corporate IT.</p></div></div>
+    <div class="row"><div class="k">Opening line</div><div class="v"><p>Ship the roadmap and fold in acquired code without adding engineers.</p></div></div>
+  </div>
+
+  <h2>Midstream operators</h2>
+  <p class="muted">Enterprise Products Partners</p>
+  <div class="ledger">
+    <div class="row"><div class="k">Champion</div><div class="v"><p>To be identified: the leader of operations or business applications.</p></div></div>
+    <div class="row"><div class="k">Economic buyer</div><div class="v"><p>Likely runs through finance, given IT's historical reporting line.</p></div></div>
+    <div class="row"><div class="k">Opening line</div><div class="v"><p>Keep a lean organization lean as the asset base grows.</p></div></div>
+  </div>
+</section>
+
+<!-- 06 PLAN -->
+<section class="chapter" id="plan" data-title="Day 1 to Day 90" data-n="06">
+  <p class="ch-num">06</p>
+  <h1>Day 1 to Day 90</h1>
+  <p class="lede">Three phases, each ending with something I can show: a map, a set of live conversations, and a first scoped deployment.</p>
+
+  <div class="phase"><div class="when">Days 1–30<small>Map the ground</small></div><div class="v">
+    <ul class="plain">
+      <li>Learn the Cognition sales motion, deal desk, and the reference customers closest to this vertical.</li>
+      <li>Fill the people gaps on all four accounts: the current owners of IT, engineering hubs, and AI programs.</li>
+      <li>Build a one-page point of view for each account, tied to its own published targets.</li>
+      <li>Meet the partner teams already working these accounts, starting with Cognition's systems integrator partners.</li>
+    </ul></div></div>
+  <div class="phase"><div class="when">Days 31–60<small>Open the conversations</small></div><div class="v">
+    <ul class="plain">
+      <li>First meetings with champions at the three Tier 1 accounts.</li>
+      <li>Run discovery to one named use case per account, with an owner and a baseline.</li>
+      <li>Agree on security review requirements early, since governance decides the timeline.</li>
+    </ul></div></div>
+  <div class="phase"><div class="when">Days 61–90<small>Land the first deployment</small></div><div class="v">
+    <ul class="plain">
+      <li>A scoped pilot in at least one account, with success measured against the baseline.</li>
+      <li>An expansion map from that use case to the next team.</li>
+      <li>The first energy reference story, which the vertical doesn't have yet.</li>
+    </ul></div></div>
+</section>
+
+<!-- 07 PLAYS -->
+<section class="chapter" id="plays" data-title="First plays" data-n="07">
+  <p class="ch-num">07</p>
+  <h1>First plays</h1>
+  <p class="lede">One play per account, ordered by when I'll run them.</p>
+
+  <div class="play"><div class="pn">01</div><div>
+    <h3>Halliburton: Landmark product engineering</h3>
+    <dl>
+      <dt>Owner</dt><dd>Vince</dd>
+      <dt>Target</dt><dd>Landmark Software and Services leadership</dd>
+      <dt>Use case</dt><dd>Integrating the Sekal and InformatiQ codebases; release velocity on DecisionSpace 365</dd>
+      <dt>Next step</dt><dd>Point of view on acquisition integration; request a meeting with the Landmark engineering lead</dd>
+      <dt>Timeline</dt><dd>Days 1–45</dd>
+    </dl></div></div>
+
+  <div class="play"><div class="pn">02</div><div>
+    <h3>Chevron: capacity for the Bengaluru hub</h3>
+    <dl>
+      <dt>Owner</dt><dd>Vince</dd>
+      <dt>Target</dt><dd>The Chief Technology &amp; Engineering Officer's organization</dd>
+      <dt>Use case</dt><dd>Hess integration work and keeping delivery steady through the workforce reduction</dd>
+      <dt>Next step</dt><dd>Map the ENGINE center's leadership; tie the pitch to the $1B technology share of the savings target</dd>
+      <dt>Timeline</dt><dd>Days 15–60, ahead of the January 2027 leadership changes</dd>
+    </dl></div></div>
+
+  <div class="play"><div class="pn">03</div><div>
+    <h3>ExxonMobil: S/4HANA migration through GBS</h3>
+    <dl>
+      <dt>Owner</dt><dd>Vince</dd>
+      <dt>Target</dt><dd>Global Business Solutions process transformation</dd>
+      <dt>Use case</dt><dd>Custom-code remediation for the move from SAP ECC6 to S/4HANA</dd>
+      <dt>Next step</dt><dd>Identify the current GBS president and the migration program owner</dd>
+      <dt>Timeline</dt><dd>Days 30–90</dd>
+    </dl></div></div>
+
+  <div class="play"><div class="pn">04</div><div>
+    <h3>Enterprise Products Partners: discovery</h3>
+    <dl>
+      <dt>Owner</dt><dd>Vince</dd>
+      <dt>Target</dt><dd>Whoever owns IT today</dd>
+      <dt>Use case</dt><dd>To be discovered</dd>
+      <dt>Next step</dt><dd>Prospect to find the IT owner; hold outreach until the CEO transition is clear</dd>
+      <dt>Timeline</dt><dd>Days 60–90 and beyond</dd>
+    </dl></div></div>
+
+  <p class="sources" style="border:0;margin-top:32px">Working plan built from public filings and news as of October 7, 2026. Account details marked "to find" or "to verify" are unconfirmed.</p>
+</section>
+
+</main>
+
+<nav class="pager" aria-label="Chapter navigation">
+  <a class="prev" id="prev" href="#"><small>Previous</small><span></span></a>
+  <a class="next" id="next" href="#"><small>Next</small><span></span></a>
+</nav>
+
+<script>
+(function(){
+  var chapters=[].slice.call(document.querySelectorAll('.chapter'));
+  var track=document.getElementById('track');
+  chapters.forEach(function(c){
+    var li=document.createElement('li');
+    var a=document.createElement('a');
+    a.href='#'+c.id;
+    a.innerHTML='<span class="n">'+c.dataset.n+'</span><span>'+c.dataset.title+'</span>';
+    li.appendChild(a);track.appendChild(li);
+  });
+  var links=[].slice.call(track.querySelectorAll('a'));
+  var prev=document.getElementById('prev'),next=document.getElementById('next');
+  var rail=document.getElementById('rail'),menu=document.querySelector('.menu');
+  function show(){
+    var id=(location.hash||'#agenda').slice(1);
+    var i=chapters.findIndex(function(c){return c.id===id});
+    if(i<0){i=0;}
+    chapters.forEach(function(c,j){c.classList.toggle('active',j===i)});
+    links.forEach(function(a,j){if(j===i)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+    var p=chapters[i-1],n=chapters[i+1];
+    prev.hidden=!p;next.hidden=!n;
+    if(p){prev.href='#'+p.id;prev.lastElementChild.innerHTML=p.dataset.title;}
+    if(n){next.href='#'+n.id;next.lastElementChild.innerHTML=n.dataset.title;}
+    document.title=(i?chapters[i].dataset.title.replace(/<[^>]+>/g,'').replace('&amp;','&')+' | ':'')+'Industrial & Energy GTM Plan';
+    window.scrollTo(0,0);
+    rail.classList.remove('open');menu&&menu.setAttribute('aria-expanded','false');
+  }
+  window.addEventListener('hashchange',show);
+  if(menu)menu.addEventListener('click',function(){var o=rail.classList.toggle('open');menu.setAttribute('aria-expanded',o?'true':'false')});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&rail.classList.contains('open')){rail.classList.remove('open');menu.setAttribute('aria-expanded','false');menu.focus();}});
+  show();
+})();
+</script>
+</body>
+</html>
